@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-  <link rel="canonical" href="https://yoast.com/wordpress-seo/" />
-  <title>UTM / Page Call Fix</title>
+  <title>Hello World</title>
+  <script src="fetch-shim.js"></script>
   <script src="page-context.js"></script>
   <script>
+
     !function () {
       var analytics = window.analytics = window.analytics || [];
       if (!analytics.initialize)
@@ -19,6 +20,7 @@
                 return window.analytics[e].apply(window.analytics, arguments);
               }
               var t = Array.prototype.slice.call(arguments);
+              console.log('buffered event:', t)
               t.unshift(e);
               analytics.push(t);
               return analytics
@@ -32,8 +34,8 @@
             var t = document.createElement('script')
             t.type = 'text/javascript'
             t.defer = !0
-            // Update: use the master branch (note: this is a less stable branch, will probably want to change in the future)
-            t.src = 'https://cdn.segment.com/analytics-next/br/master/latest/standalone.js.gz' 
+            t.src = 'http://127.0.0.1:8080/umd/standalone.js'
+            // t.src = 'https://cdn.segment.com/analytics.js/v1/' + key + '/analytics.min.js'
             var n = document.getElementsByTagName('script')[0]
             n.parentNode.insertBefore(t, n)
             analytics._writeKey = key
@@ -42,10 +44,9 @@
           analytics._writeKey = "9lSrez3BlfLAJ7NOChrqWtILiATiycoc";
           analytics.SNIPPET_VERSION = "4.15.2";
           analytics.load("9lSrez3BlfLAJ7NOChrqWtILiATiycoc");
-          // Update
-          function getPageProps(){const e=document.querySelector("link[rel='canonical']"),t=e&&e.getAttribute("href"),n=location.search;return{path:(()=>{if(!t)return window.location.pathname;const e=document.createElement("a");e.href=t;return e.pathname.startsWith("/")?e.pathname:"/"+e.pathname})(),referrer:document.referrer,search:n,title:document.title,url:(()=>{if(t)return t.indexOf("?")>-1?t:`${t}${n}`;const e=window.location.href,r=e.indexOf("#");return-1===r?e:e.slice(0,r)})()}}
-          // Update
-          analytics.page(undefined, undefined, getPageProps()) 
+
+          analytics.page("Page context passed: Should work if you change query params quickly (and have no campaign, and no query params)", undefined, { ...pageContextDefault(), hello: 'world' })
+          analytics.page("No page context passed: SHOULD BE BROKEN if you change query params quickly  (have a campaign and query params)")
         }
     }();
 
