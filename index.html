@@ -32,8 +32,8 @@
             var t = document.createElement('script')
             t.type = 'text/javascript'
             t.defer = !0
-            // Update: use the master branch (note: this is a less stable branch, will probably want to change in the future)
-            t.src = 'https://cdn.segment.com/analytics-next/br/master/latest/standalone.js.gz' 
+            // Update: (temporarily) pin analytics to get the bugfix - https://github.com/segmentio/analytics-next/releases/tag/%40segment%2Fanalytics-next%401.51.5
+            t.src = 'https://cdn.segment.com/analytics-next/br/master/a8b0fc8/standalone.js.gz'  
             var n = document.getElementsByTagName('script')[0]
             n.parentNode.insertBefore(t, n)
             analytics._writeKey = key
