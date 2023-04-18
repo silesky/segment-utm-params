@@ -32,8 +32,9 @@
             var t = document.createElement('script')
             t.type = 'text/javascript'
             t.defer = !0
-            // Update: (temporarily) pin analytics to get the bugfix - https://github.com/segmentio/analytics-next/releases/tag/%40segment%2Fanalytics-next%401.51.5
-            t.src = 'https://cdn.segment.com/analytics-next/br/master/a8b0fc8/standalone.js.gz'  
+            // Update: Temporarily pin script to a commit https://github.com/segmentio/analytics-next/releases/tag/%40segment%2Fanalytics-next%401.51.5
+            // Note: this can be reverted later after the fix is generally available.
+            t.src = 'https://cdn.segment.com/analytics-next/br/master/a8b0fc8/standalone.js.gz' 
             var n = document.getElementsByTagName('script')[0]
             n.parentNode.insertBefore(t, n)
             analytics._writeKey = key
@@ -41,9 +42,10 @@
           }
           analytics._writeKey = "9lSrez3BlfLAJ7NOChrqWtILiATiycoc"; 
           analytics.SNIPPET_VERSION = "4.15.2";
+          analytics.load("9lSrez3BlfLAJ7NOChrqWtILiATiycoc")
           // Update
           function getPageProps(){const e=document.querySelector("link[rel='canonical']"),t=e&&e.getAttribute("href"),n=location.search;return{path:(()=>{if(!t)return window.location.pathname;const e=document.createElement("a");e.href=t;return e.pathname.startsWith("/")?e.pathname:"/"+e.pathname})(),referrer:document.referrer,search:n,title:document.title,url:(()=>{if(t)return t.indexOf("?")>-1?t:`${t}${n}`;const e=window.location.href,r=e.indexOf("#");return-1===r?e:e.slice(0,r)})()}}
-          // Update.
+          // Update. This ensures that the page event contains the correct data, even if 
           analytics.page(undefined, undefined, getPageProps()) 
         }
     }();
