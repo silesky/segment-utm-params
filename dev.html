@@ -25,8 +25,8 @@
           url: (function () {
             if (canonicalPath) return canonicalPath.indexOf('?') > -1 ? canonicalPath : canonicalPath + searchParams
             const url = window.location.href
-            const r = url.indexOf('#')
-            return r === -1 ? url : url.slice(0, r)
+            const hashIdx = url.indexOf('#')
+            return hashIdx === -1 ? url : url.slice(0, hashIdx)
           })()
         }
       }
