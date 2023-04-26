@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-  <link rel="canonical" href="https://yoast.com/wordpress-seo/" />
+  <link rel="canonical" href="https://my-canonical-url.com" />
   <title>UTM / Page Call Fix</title>
-  <script src="page-context.js"></script>
   <script>
     !function () {
       var analytics = window.analytics = window.analytics || [];
@@ -32,9 +31,7 @@
             var t = document.createElement('script')
             t.type = 'text/javascript'
             t.defer = !0
-            // Update: Temporarily pin script to a commit https://github.com/segmentio/analytics-next/releases/tag/%40segment%2Fanalytics-next%401.51.5
-            // Note: this can be reverted later after the fix is generally available.
-            t.src = 'https://cdn.segment.com/analytics-next/br/master/a8b0fc8/standalone.js.gz'
+            t.src = 'https://cdn.segment.com/analytics.js/v1/' + key + '/analytics.min.js'
             var n = document.getElementsByTagName('script')[0]
             n.parentNode.insertBefore(t, n)
             analytics._writeKey = key
@@ -76,7 +73,6 @@
 </head>
 
 <body>
-  <h1>Segment Snippet JS - UTM Params [Dev]</h1>
   <a href="/">Reload</a>
   <h2 id="key">Loading Key...</h2>
   <button id="track">Track</button>
