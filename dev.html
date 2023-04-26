@@ -7,12 +7,12 @@
   <script>
     !function () {
       // Update
-      function getPageProps() {
+      function getPageCtx() {
         const e = document.querySelector("link[rel='canonical']")
         const t = e && e.getAttribute('href')
         const n = location.search
         return {
-          __type: 'pageProps',
+          __type: 'pagectx',
           path: (function () {
             if (!t) return window.location.pathname
             const e = document.createElement('a')
@@ -43,7 +43,7 @@
                 return window.analytics[e].apply(window.analytics, arguments);
               }
               var t = Array.prototype.slice.call(arguments);
-              t.push(getPageProps())
+              t.push(getPageCtx())
               console.log('buffered event:', t)
               t.unshift(e);
               analytics.push(t);
