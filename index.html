@@ -53,7 +53,7 @@
                 if (!t) return window.location.pathname
                 const e = document.createElement('a')
                 e.href = t
-                return e.pathname.startsWith('/') ? e.pathname : '/' + e.pathname
+                return e.pathname[0] === '/' ? e.pathname : '/' + e.pathname
               })(),
               referrer: document.referrer,
               search: n,
