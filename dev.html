@@ -8,25 +8,25 @@
     !function () {
       // Update
       function getPageCtx() {
-        const e = document.querySelector("link[rel='canonical']")
-        const t = e && e.getAttribute('href')
-        const n = location.search
+        const canonEl = document.querySelector("link[rel='canonical']")
+        const canonicalPath = canonEl && canonEl.getAttribute('href')
+        const searchParams = location.search
         return {
           __type: 'pagectx',
           path: (function () {
-            if (!t) return window.location.pathname
-            const e = document.createElement('a')
-            e.href = t
-            return e.pathname[0] === '/' ? e.pathname : '/' + e.pathname
+            if (!canonicalPath) return window.location.pathname
+            const a = document.createElement('a')
+            a.href = canonicalPath
+            return a.pathname[0] === '/' ? a.pathname : '/' + a.pathname
           })(),
           referrer: document.referrer,
-          search: n,
+          search: searchParams,
           title: document.title,
           url: (function () {
-            if (t) return t.indexOf('?') > -1 ? t : t + n
-            const e = window.location.href
-            const r = e.indexOf('#')
-            return r === -1 ? e : e.slice(0, r)
+            if (canonicalPath) return canonicalPath.indexOf('?') > -1 ? canonicalPath : canonicalPath + searchParams
+            const url = window.location.href
+            const r = url.indexOf('#')
+            return r === -1 ? url : url.slice(0, r)
           })()
         }
       }
